@@ -1,0 +1,13 @@
+<svg width="900" height="420" viewBox="0 0 900 420" xmlns="http://www.w3.org/2000/svg">
+  <rect width="900" height="420" rx="30" fill="url(#bg)"/>
+  <rect x="60" y="70" width="780" height="280" rx="28" fill="#ffffff" opacity="0.9"/>
+  <circle cx="240" cy="210" r="110" fill="#ff8f1f" opacity="0.16"/>
+  <circle cx="660" cy="188" r="92" fill="#2e7d32" opacity="0.16"/>
+  <path d="M220 250c18-48 44-76 88-80 41-3 73 18 92 56-24 8-48 20-62 38-24 29-40 45-76 54-17-18-33-41-42-68z" fill="#2e7d32"/>
+  <path d="M292 198c16-34 40-54 78-65 17-5 35-7 53-4-18 18-30 38-36 62-8 35-14 64-30 94-18-18-38-40-54-63-11-16-15-17-11-24z" fill="#ff8f1f"/>
+  <path d="M590 250c24-56 64-83 118-85 38-2 74 16 94 46-16 6-28 18-40 34-18 24-31 42-66 56-15-16-32-38-45-61-7-12-13-18-61-30z" fill="#2e7d32"/>
+  <path d="M642 222c18-21 33-32 54-40 15-6 31-9 46-8-10 19-17 38-19 60-3 26-11 51-28 72-14-10-28-23-41-42-12-18-15-27-12-42z" fill="#ff8f1f"/>
+  <text x="95" y="130" font-size="34" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#174d1c">Premium Agriculture Dashboard</text>
+  <text x="95" y="170" font-size="22" font-family="Segoe UI, Arial, sans-serif" fill="#4b634b">Smart insights for vegetable price forecasting and market analysis</text>
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#f9fff7"/><stop offset="100%" stop-color="#eaf7e6"/></linearGradient></defs>
+</svg>

@@ -1,0 +1,11 @@
+<svg width="680" height="420" viewBox="0 0 680 420" xmlns="http://www.w3.org/2000/svg">
+  <rect width="680" height="420" rx="28" fill="url(#bg)"/>
+  <rect x="52" y="60" width="576" height="300" rx="28" fill="#ffffff" opacity="0.92"/>
+  <path d="M154 284c24-58 50-91 102-96 44-4 78 18 97 54-20 8-39 20-54 38-22 24-35 42-73 51-16-14-33-34-44-60-9-18-18-21-28-20z" fill="#2e7d32"/>
+  <path d="M164 250c20-24 42-37 72-42 31-5 58 4 80 29-12 8-24 18-35 33-20 26-36 43-64 56-15-13-31-30-43-48-8-11-10-16-10-28z" fill="#ff8f1f"/>
+  <path d="M430 274c13-46 41-72 84-74 33-1 66 16 81 42-15 8-28 19-39 36-16 25-29 45-58 57-13-14-28-35-40-57-7-12-11-15-28-4z" fill="#2e7d32"/>
+  <path d="M472 246c11-18 23-27 40-34 15-6 30-8 46-5-9 13-15 28-17 44-3 22-8 45-23 63-12-11-23-23-34-39-9-13-12-19-12-29z" fill="#ff8f1f"/>
+  <text x="86" y="128" font-size="28" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#174d1c">Forecasting made elegant</text>
+  <text x="86" y="164" font-size="18" font-family="Segoe UI, Arial, sans-serif" fill="#4b634b">A premium user experience for agricultural price prediction</text>
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#f7fff4"/><stop offset="100%" stop-color="#e8f6e2"/></linearGradient></defs>
+</svg>

@@ -1,0 +1,9 @@
+<svg width="520" height="180" viewBox="0 0 520 180" xmlns="http://www.w3.org/2000/svg">
+  <rect width="520" height="180" rx="28" fill="#0f3d1c"/>
+  <circle cx="120" cy="90" r="48" fill="#ff8f1f"/>
+  <path d="M92 92c10-24 36-34 52-24 10 6 16 18 16 30 0 26-24 46-48 46s-36-16-36-32c0-8 4-14 16-20z" fill="#2e7d32"/>
+  <path d="M160 108c14-34 50-48 74-42 19 5 34 20 39 40-14-10-31-14-46-12-20 4-34 18-48 34-8 10-20 16-32 22 0-18 7-31 13-42z" fill="#f4f9f2" opacity="0.95"/>
+  <text x="220" y="78" font-size="28" font-family="Segoe UI, Arial, sans-serif" font-weight="700" fill="#f4f9f2">AgriPrice</text>
+  <text x="220" y="112" font-size="20" font-family="Segoe UI, Arial, sans-serif" fill="#dcefdc">AI Vegetable Forecasting</text>
+  <rect x="220" y="126" width="130" height="8" rx="4" fill="#ff8f1f"/>
+</svg>
