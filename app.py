@@ -1,10 +1,9 @@
 import pandas as pd
-
 import streamlit as st
 from pathlib import Path
 
 from utils.charts import load_dataset, plot_average_price_by_state, plot_top_commodities
-from utils.ui_helpers import load_css, render_footer, render_header, render_metric_card
+from utils.ui_helpers import load_css, render_footer, render_header, render_metric_card, render_status_banner
 
 ROOT = Path(__file__).resolve().parent
 
@@ -17,69 +16,73 @@ st.set_page_config(
 load_css()
 
 df = load_dataset()
-variety_df = pd.read_excel(ROOT / "data" / "commodity_variety_grade_dataset.xlsx")
 
-st.sidebar.image(str(ROOT / "images" / "agri_logo.svg"), use_container_width=True)
 st.sidebar.markdown(
-    """
+    f"""
     <div class="sidebar-brand">
-        <h3>AgriPrice AI</h3>
-        <p>Smart vegetable market intelligence</p>
+        <div class="sidebar-logo">🥕</div>
+        <div>
+            <div class="sidebar-title">AgriPrice AI</div>
+            <div class="sidebar-copy">Premium market intelligence</div>
+        </div>
     </div>
     """,
     unsafe_allow_html=True,
 )
-st.sidebar.markdown("---")
-st.sidebar.markdown(
-    "<div class='info-banner'>The existing Random Forest workflow remains unchanged while the experience is upgraded for a premium dashboard presentation.</div>",
-    unsafe_allow_html=True,
-)
 
 render_header(
-    "Vegetable Price Prediction Dashboard",
-    "A premium AI-powered agriculture forecasting experience for modern project presentations.",
+    "Vegetable Price Prediction",
+    "AI-powered agricultural market intelligence for modern forecasting and portfolio-ready presentations.",
     "🥕",
 )
 
 st.markdown(
-    "<div class='info-banner'>The platform combines historical market data with a trained Random Forest model to deliver fast and reliable price forecasts.</div>",
+    """
+    <div class="hero-shell">
+        <div class="hero-copy">
+            <div class="section-label">AI SaaS Dashboard</div>
+            <h2>From raw market signals to polished forecasts in seconds.</h2>
+            <p>Explore historical trends, inspect market context, and generate predictions with the same trained Random Forest workflow preserved beneath the new experience.</p>
+            <div class="hero-actions">
+                <span class="hero-pill">Glassmorphism UI</span>
+                <span class="hero-pill">Theme aware charts</span>
+                <span class="hero-pill">Responsive by design</span>
+            </div>
+        </div>
+    </div>
+    """,
     unsafe_allow_html=True,
 )
 
-col_a, col_b = st.columns([1.2, 0.8])
-with col_a:
-    st.markdown(
-        """
-        <div class="panel-card">
-            <h4 style="margin-top:0; color:#f8fafc;">What this dashboard offers</h4>
-            <p style="color:#cbd5e1;">Explore historical trends, inspect the dataset, uncover market patterns, and predict vegetable prices through a polished and responsive interface.</p>
-            <ul style="color:#cbd5e1; line-height:1.7;">
-                <li>Dark premium SaaS-style dashboard</li>
-                <li>Interactive Plotly visualizations</li>
-                <li>Responsive KPI summaries</li>
-                <li>Clean prediction workflow</li>
-            </ul>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-with col_b:
-    st.image(str(ROOT / "images" / "vegetable_banner.svg"), use_container_width=True)
+render_status_banner(
+    "Live intelligence",
+    "The interface now feels like a premium AI product while the existing machine learning workflow stays unchanged.",
+    "info",
+)
 
-cols = st.columns(4)
 metrics = [
-    ("Total Records", len(df), "Rows in the cleaned dataset", "📦"),
-    ("Total States", df["STATE"].nunique(), "Distinct states covered", "🗺️"),
-    ("Total Markets", df["Market Name"].nunique(), "Active trading markets", "🏪"),
-    ("Total Vegetables", df["Commodity"].nunique(), "Unique vegetables tracked", "🥬"),
+    ("Dataset Size", f"{len(df):,}", "Rows across the cleaned dataset", "📦"),
+    ("States", df["STATE"].nunique(), "Coverage across regions", "🗺️"),
+    ("Markets", df["Market Name"].nunique(), "Trading hubs tracked", "🏪"),
+    ("Commodities", df["Commodity"].nunique(), "Vegetables monitored", "🥬"),
+    ("Prediction Count", f"{len(df):,}", "Ready for live forecasting", "⚡"),
+    ("Highest Price", f"₹ {df['Modal_Price'].max():,.2f}", "Peak market signal", "📈"),
+    ("Lowest Price", f"₹ {df['Modal_Price'].min():,.2f}", "Minimum observed price", "📉"),
+    ("Average Price", f"₹ {df['Modal_Price'].mean():,.2f}", "Typical modal price", "🧠"),
 ]
-for col, (title, value, subtitle, icon) in zip(cols, metrics):
+
+metric_cols = st.columns(4)
+for index, (title, value, subtitle, icon) in enumerate(metrics):
+    col = metric_cols[index % 4]
     render_metric_card(col, title, value, subtitle, icon)
 
+st.markdown("<div class='section-label'>Performance Overview</div>", unsafe_allow_html=True)
 chart_col_1, chart_col_2 = st.columns(2)
 with chart_col_1:
+    st.markdown("<div class='glass-card'><h4>Market volume</h4><p>See which commodities appear most commonly across the dataset.</p></div>", unsafe_allow_html=True)
     st.plotly_chart(plot_top_commodities(df), use_container_width=True)
 with chart_col_2:
+    st.markdown("<div class='glass-card'><h4>Regional pricing</h4><p>Compare average modal prices across states with a polished visual summary.</p></div>", unsafe_allow_html=True)
     st.plotly_chart(plot_average_price_by_state(df), use_container_width=True)
 
 render_footer()
