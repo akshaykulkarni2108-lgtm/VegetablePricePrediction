@@ -22,7 +22,10 @@ def fetch_live_price(commodity, market=""):
         if "results" not in response or len(response["results"]) == 0:
             return None
 
-        text = response["results"][0]["content"]
+        text = response["results"][0].get("content", "")
+
+        if not text:
+            return None
 
         modal = None
         minimum = None
@@ -47,9 +50,9 @@ def fetch_live_price(commodity, market=""):
             "commodity": commodity,
             "market": market,
             "date": "Today",
-            "min": minimum if minimum else modal,
-            "max": maximum if maximum else modal,
-            "modal": modal,
+            "min": float(minimum or modal or 0),
+            "max": float(maximum or modal or 0),
+            "modal": float(modal or 0),
             "source": "Tavily Live Search"
         }
 

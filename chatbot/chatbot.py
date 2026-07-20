@@ -82,19 +82,14 @@ class AgroMateChatbot:
             return None
 
         return {
-
             "avg": subset["Modal_Price"].mean(),
-
             "max": subset["Modal_Price"].max(),
-
             "min": subset["Modal_Price"].min(),
-
             "latest": (
                 subset["Price Date"].max()
                 if "Price Date" in subset.columns
                 else "N/A"
             )
-
         }
 
     # ----------------------------------------------------
@@ -106,28 +101,17 @@ class AgroMateChatbot:
         prediction = historical_avg
 
         try:
-
-            last_prediction = st.session_state.get(
-                "last_prediction"
-            )
+            last_prediction = st.session_state.get("last_prediction")
 
             if (
                 last_prediction
-                and
-                isinstance(last_prediction, dict)
+                and isinstance(last_prediction, dict)
             ):
-
                 prediction = float(
-
-                    last_prediction.get(
-                        "prediction",
-                        historical_avg
-                    )
-
+                    last_prediction.get("prediction", historical_avg)
                 )
 
         except Exception:
-
             pass
 
         return prediction
@@ -197,25 +181,25 @@ class AgroMateChatbot:
 
         live = fetch_live_price(commodity, market)
 
-        if live is None:
+        if not live:
             return "⚠ Unable to fetch live market price."
+
+        min_price = float(live.get("min", 0) or 0)
+        max_price = float(live.get("max", 0) or 0)
+        modal_price = float(live.get("modal", 0) or 0)
 
         return f"""
 🌐 **Live Market Price**
 
-Commodity : {live.get('commodity','N/A')}
+Commodity : {live.get("commodity", "N/A")}
+Market : {live.get("market", "N/A")}
+Date : {live.get("date", "Today")}
 
-Market : {live.get('market','N/A')}
+Minimum : ₹{min_price:,.2f}
+Maximum : ₹{max_price:,.2f}
+Modal : ₹{modal_price:,.2f}
 
-Date : {live.get('date','N/A')}
-
-Minimum : ₹{live.get('min',0):,.2f}
-
-Maximum : ₹{live.get('max',0):,.2f}
-
-Modal : ₹{live.get('modal',0):,.2f}
-
-Source : {live.get('source','Agmarknet')}
+Source : {live.get("source", "Tavily")}
 """
 
     # ----------------------------------------------------
