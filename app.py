@@ -45,7 +45,7 @@ st.markdown(
             <p>Explore historical trends, inspect market context, and generate predictions with the same trained Random Forest workflow preserved beneath the new experience.</p>
             <div class="hero-actions">
                 <span class="hero-pill">Glassmorphism UI</span>
-                <span class="hero-pill">Theme aware charts</span>
+                <span class="hero-pill">Premium dark charts</span>
                 <span class="hero-pill">Responsive by design</span>
             </div>
         </div>

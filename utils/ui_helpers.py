@@ -1,150 +1,15 @@
 import base64
 from pathlib import Path
-from typing import Literal, TypedDict, cast
 
 import streamlit as st
 
 
 ROOT = Path(__file__).resolve().parents[1]
 
-ThemeMode = Literal["dark", "light", "auto"]
-
-
-class ThemePalette(TypedDict):
-    bg: str
-    bg_secondary: str
-    sidebar: str
-    glass: str
-    border: str
-    text: str
-    muted: str
-    primary: str
-    accent: str
-    shadow: str
-    shadow_strong: str
-    input: str
-    gradient: str
-    ambient: str
-    ambient_soft: str
-
-
-THEME_OPTIONS: tuple[ThemeMode, ...] = ("dark", "light", "auto")
-
-
-def _theme_label(mode: ThemeMode) -> str:
-    labels = {
-        "dark": "🌙 Dark Mode",
-        "light": "☀️ Light Mode",
-        "auto": "🖥️ Auto",
-    }
-    return labels[mode]
-
-
-def _initialize_theme_mode() -> ThemeMode:
-    if "theme_mode" not in st.session_state:
-        st.session_state.theme_mode = "auto"
-
-    theme_mode = st.session_state.theme_mode
-    if theme_mode not in THEME_OPTIONS:
-        st.session_state.theme_mode = "auto"
-        return "auto"
-
-    return cast(ThemeMode, theme_mode)
-
-
-def _resolve_theme_mode(theme_mode: ThemeMode) -> ThemeMode:
-    if theme_mode != "auto":
-        return theme_mode
-
-    try:
-        configured = st.get_option("theme.base")
-    except Exception:
-        configured = None
-
-    if configured in {"dark", "night"}:
-        return "dark"
-    if configured in {"light", "default"}:
-        return "light"
-
-    return "dark"
-
-
-def _get_palette(theme_mode: ThemeMode) -> ThemePalette:
-    resolved_theme = _resolve_theme_mode(theme_mode)
-    if resolved_theme == "light":
-        return {
-            "bg": "#f5f7fb",
-            "bg_secondary": "#edf2f8",
-            "sidebar": "rgba(255,255,255,0.82)",
-            "glass": "rgba(255,255,255,0.76)",
-            "border": "rgba(15, 23, 42, 0.1)",
-            "text": "#0f172a",
-            "muted": "#475569",
-            "primary": "#16a34a",
-            "accent": "#f59e0b",
-            "shadow": "0 18px 55px rgba(15, 23, 42, 0.12)",
-            "shadow_strong": "0 24px 70px rgba(15, 23, 42, 0.18)",
-            "input": "rgba(255,255,255,0.96)",
-            "gradient": "linear-gradient(135deg, #16a34a 0%, #f59e0b 100%)",
-            "ambient": "rgba(22, 163, 74, 0.16)",
-            "ambient_soft": "rgba(245, 158, 11, 0.16)",
-        }
-
-    return {
-        "bg": "#040816",
-        "bg_secondary": "#071120",
-        "sidebar": "rgba(4, 8, 22, 0.82)",
-        "glass": "rgba(255,255,255,0.08)",
-        "border": "rgba(255,255,255,0.14)",
-        "text": "#f8fafc",
-        "muted": "#dbe4f0",
-        "primary": "#34d399",
-        "accent": "#fbbf24",
-        "shadow": "0 18px 55px rgba(2, 8, 23, 0.42)",
-        "shadow_strong": "0 24px 70px rgba(2, 8, 23, 0.56)",
-        "input": "rgba(8, 15, 33, 0.8)",
-        "gradient": "linear-gradient(135deg, #34d399 0%, #f59e0b 100%)",
-        "ambient": "rgba(52, 211, 153, 0.18)",
-        "ambient_soft": "rgba(251, 191, 36, 0.18)",
-    }
-
-
-def render_theme_controls() -> None:
-    st.sidebar.markdown(
-        """
-        <div class="sidebar-card">
-            <div class="section-label">Appearance</div>
-            <div class="sidebar-title">Theme</div>
-            <div class="sidebar-copy">Switch instantly and keep your preference for this session.</div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-    current_theme = _initialize_theme_mode()
-    theme_mode = st.sidebar.radio(
-        "Theme",
-        options=list(THEME_OPTIONS),
-        index=list(THEME_OPTIONS).index(current_theme),
-        key="theme_mode",
-        horizontal=False,
-        label_visibility="collapsed",
-        format_func=_theme_label,
-    )
-
-    resolved_theme = _resolve_theme_mode(cast(ThemeMode, theme_mode))
-    st.session_state.resolved_theme = resolved_theme
-    st.sidebar.markdown("<div class='sidebar-divider'></div>", unsafe_allow_html=True)
-    st.sidebar.caption("Auto follows the active system preference whenever available.")
-
 
 def load_css() -> None:
-    render_theme_controls()
-
-    current_theme = _initialize_theme_mode()
-    resolved_theme = _resolve_theme_mode(current_theme)
-    palette = _get_palette(current_theme)
-    st.session_state.resolved_theme = resolved_theme
+    
+    
 
     css_path = ROOT / "styles" / "main.css"
     with css_path.open("r", encoding="utf-8") as f:
@@ -154,21 +19,21 @@ def load_css() -> None:
         f"""
         <style>
         :root {{
-            --app-background: {palette['bg']};
-            --app-background-secondary: {palette['bg_secondary']};
-            --sidebar-background: {palette['sidebar']};
-            --glass-background: {palette['glass']};
-            --border: {palette['border']};
-            --text: {palette['text']};
-            --muted: {palette['muted']};
-            --primary: {palette['primary']};
-            --accent: {palette['accent']};
-            --shadow: {palette['shadow']};
-            --shadow-strong: {palette['shadow_strong']};
-            --input-background: {palette['input']};
-            --gradient: {palette['gradient']};
-            --ambient-glow: {palette['ambient']};
-            --ambient-soft: {palette['ambient_soft']};
+            --app-background: #0B1220;
+            --app-background-secondary: #161F33;
+            --sidebar-background: rgba(6, 12, 26, 0.92);
+            --glass-background: #161F33;
+            --border: rgba(255,255,255,0.12);
+            --text: #F8FAFC;
+            --muted: #94A3B8;
+            --primary: #22C55E;
+            --accent: #F59E0B;
+            --shadow: 0 18px 55px rgba(2, 8, 23, 0.42);
+            --shadow-strong: 0 24px 70px rgba(2, 8, 23, 0.56);
+            --input-background: rgba(8, 15, 33, 0.88);
+            --gradient: linear-gradient(135deg, #22C55E 0%, #F59E0B 100%);
+            --ambient-glow: rgba(34, 197, 94, 0.16);
+            --ambient-soft: rgba(245, 158, 11, 0.16);
             --glass-blur: 22px;
         }}
         {css}

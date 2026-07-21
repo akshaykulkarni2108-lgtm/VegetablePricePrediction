@@ -212,10 +212,14 @@ if predict:
 
         fig = px.line(history, x="Price Date", y="Modal_Price", markers=True, title="Historical Price Trend")
         fig.update_layout(
-            template="plotly_white" if st.session_state.get("resolved_theme") == "light" else "plotly_dark",
+            template="plotly_dark",
             paper_bgcolor="rgba(0,0,0,0)",
             plot_bgcolor="rgba(0,0,0,0)",
             margin=dict(l=20, r=20, t=50, b=20),
+            font=dict(color="#F8FAFC"),
+            title=dict(font=dict(color="#F8FAFC")),
+            xaxis=dict(showgrid=False, zeroline=False, tickfont=dict(size=11)),
+            yaxis=dict(gridcolor="rgba(148, 163, 184, 0.22)", zeroline=False),
         )
 
         st.markdown("<div class='glass-card'><h4 style='margin-top:0;'>Historical trend</h4><p style='margin-bottom:0;'>A compact view of the selected market's historical price movements.</p></div>", unsafe_allow_html=True)

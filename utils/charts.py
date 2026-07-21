@@ -12,27 +12,17 @@ def load_dataset():
     return pd.read_csv(ROOT / "data" / "cleaned_data.csv")
 
 
-def _get_plotly_theme() -> str:
-    resolved_theme = st.session_state.get("resolved_theme", "dark")
-    return "plotly_white" if resolved_theme == "light" else "plotly_dark"
-
-
 def _style_chart(fig):
-    is_light = _get_plotly_theme() == "plotly_white"
-    colors = {
-        "text": "#0f172a" if is_light else "#f8fafc",
-        "grid": "rgba(148, 163, 184, 0.18)" if is_light else "rgba(148, 163, 184, 0.22)",
-    }
     fig.update_layout(
-        template=_get_plotly_theme(),
+        template="plotly_dark",
         showlegend=False,
         margin=dict(l=20, r=20, t=50, b=20),
         paper_bgcolor="rgba(0,0,0,0)",
         plot_bgcolor="rgba(0,0,0,0)",
-        font=dict(color=colors["text"]),
-        title=dict(font=dict(color=colors["text"])),
+        font=dict(color="#F8FAFC"),
+        title=dict(font=dict(color="#F8FAFC")),
         xaxis=dict(showgrid=False, zeroline=False, tickfont=dict(size=11)),
-        yaxis=dict(gridcolor=colors["grid"], zeroline=False),
+        yaxis=dict(gridcolor="rgba(148, 163, 184, 0.22)", zeroline=False),
     )
     fig.update_traces(textposition="outside", marker=dict(line=dict(color="rgba(255,255,255,0.18)", width=1)))
     return fig
